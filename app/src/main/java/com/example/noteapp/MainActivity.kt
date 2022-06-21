@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity(),ItemOnClickListenner {
         val loadNotesList : MutableList<NotesModel>? = gson.fromJson(json, type)
 
 
-        adapter.notesList = (loadNotesList ?: listOf()) as MutableList<NotesModel>
+        adapter.notesList = (loadNotesList ?: listOf()).toMutableList()
     }
 
 }
