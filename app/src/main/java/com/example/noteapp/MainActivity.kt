@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import com.example.noteapp.adapter.Adapter
+import com.example.noteapp.adapter.ItemOnClickListenner
 import com.example.noteapp.databinding.ActivityMainBinding
 import com.example.noteapp.databinding.DialogBinding
 import com.example.noteapp.db.personDao
@@ -14,12 +15,12 @@ import com.example.noteapp.models.NotesModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),ItemOnClickListenner {
     private val binding :ActivityMainBinding by lazy {
         ActivityMainBinding.inflate(layoutInflater)
     }
     private val adapter:Adapter by lazy {
-        Adapter()
+        Adapter(actionListener = this)
     }
     private val dao: personDao by lazy {
         App.personDatabase.personDao()
@@ -81,7 +82,7 @@ class MainActivity : AppCompatActivity() {
         val loadNotesList : MutableList<NotesModel>? = gson.fromJson(json, type)
 
 
-        adapter.notesList = loadNotesList ?: listOf()
+        adapter.notesList = (loadNotesList ?: listOf()) as MutableList<NotesModel>
     }
 
 }

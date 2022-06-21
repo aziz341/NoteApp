@@ -16,7 +16,7 @@ class NoteActivity : AppCompatActivity() {
     private var notesList = mutableListOf<NotesModel>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_note)
         binding.saveBtn.setOnClickListener {
             addNewNote()
         }

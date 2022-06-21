@@ -1,5 +1,6 @@
 package com.example.noteapp.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -8,13 +9,9 @@ import com.example.noteapp.R
 import com.example.noteapp.databinding.ItemBinding
 import com.example.noteapp.models.NotesModel
 
-class Adapter:
-    RecyclerView.Adapter<Adapter.ViewHolder>() {
-    val actionListener : ItemOnClickListenner
-        get() {
-            TODO()
-        }
-    var notesList: List<NotesModel> = mutableListOf()
+class Adapter(private val actionListener:ItemOnClickListenner): RecyclerView.Adapter<Adapter.ViewHolder>() {
+    var notesList: MutableList<NotesModel> = mutableListOf()
+        @SuppressLint("NotifyDataSetChanged")
         set(newValue) {
             field = newValue
             notifyDataSetChanged()
@@ -30,7 +27,7 @@ class Adapter:
 
                     itemView.setOnClickListener {
 
-                        actionListener.showCustomAlertDialog(position = adapterPosition,personItem = personItem)
+                        actionListener.showCustomAlertDialog(position = adapterPosition,car = note)
                     }
 
                 }
@@ -65,6 +62,6 @@ class Adapter:
     override fun getItemCount(): Int = notesList.size
     }
 interface ItemOnClickListenner {
-    fun showCustomAlertDialog(position: Int, car: NotesModel, personItem: TextView)
+    fun showCustomAlertDialog(position: Int, car: NotesModel)
 }
 
